@@ -1,0 +1,234 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+
+public partial class TaskInformation : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            if (Request.QueryString["TaskID"] == null)
+            {
+                UpdateTaskInfoBtn.Text = "Add New Task";
+            }
+            else
+            {
+                DataView dv;
+                WebToolbox wt = new WebToolbox();
+                AddNewBtn.Visible = false;
+
+                try
+                {
+                    VolDataSource.SelectCommand = "SELECT Description, LocationID, DepartmentID, DayID, DATEPART(hour, StartTime) as hour, DATEPART(minute, StartTime) as minute, Duration, RequiredVolunteers, OptionalVolunteers, PriorityID, StatusID FROM Tasks WHERE TaskID = " + wt.SQLCleanData(Request.QueryString["TaskID"]);
+                    dv = (DataView)VolDataSource.Select(DataSourceSelectArguments.Empty);
+
+                    DescriptionTxt.Text = (string)dv.Table.Rows[0]["Description"];
+                    LocationList.SelectedValue = Convert.ToString(dv.Table.Rows[0]["LocationID"]);
+                    DepartmentList.SelectedValue = Convert.ToString(dv.Table.Rows[0]["DepartmentID"]);
+                    StartDayList.SelectedValue = Convert.ToString(dv.Table.Rows[0]["DayID"]);
+
+                    int hour = Convert.ToInt32(dv.Table.Rows[0]["hour"]);
+                    if (hour > 12)
+                    {
+                        StartTimeHRList.SelectedIndex = hour - 13;
+                        StartTimeAMPMList.SelectedIndex = 1;
+                    }
+                    else
+                    {
+                        StartTimeHRList.SelectedIndex = hour - 1;
+                        StartTimeAMPMList.SelectedIndex = 0;
+                    }
+                    StartTimeMinList.SelectedValue = Convert.ToString(dv.Table.Rows[0]["minute"]);
+
+                    DurationTxt.Text = Convert.ToString(dv.Table.Rows[0]["Duration"]);
+                    RequiredVolsTxt.Text = Convert.ToString(dv.Table.Rows[0]["RequiredVolunteers"]);
+                    OptionalVolsTxt.Text = Convert.ToString(dv.Table.Rows[0]["OptionalVolunteers"]);
+                    PriorityList.SelectedValue = Convert.ToString(dv.Table.Rows[0]["PriorityID"]);
+                    StatusList.SelectedValue = Convert.ToString(dv.Table.Rows[0]["StatusID"]);
+
+                    AssignedVolunteersLabel.Text = "Assigned Volunters";
+                    TasksDataSource.SelectCommand = "SELECT Volunteers.VolunteerID, FirstName, LastName FROM Volunteers, TaskVolunteers WHERE Volunteers.VolunteerID = TaskVolunteers.VolunteerID AND TaskID = " + wt.SQLCleanData(Request.QueryString["TaskID"]);
+                    TasksDataSource.Select(DataSourceSelectArguments.Empty);
+                }
+                catch (Exception exc)
+                {
+                    wt.LogError(exc.Message, "Error in Task Information Page - Page Load", Page);
+                }
+            }
+        }
+    }
+
+    protected void UpdateTaskInfoBtn_Click(object sender, EventArgs e)
+    {
+        if (Page.IsValid)
+        {
+            WebToolbox wt = new WebToolbox();
+            int totalVolunteers = Convert.ToInt32(RequiredVolsTxt.Text) + Convert.ToInt32(OptionalVolsTxt.Text);
+
+            if (Request.QueryString["TaskID"] == null)
+            {
+                try
+                {
+                    VolDataSource.InsertCommand = "INSERT INTO Tasks (Description,LocationID,DepartmentID,DayID,StartTime,Duration,RequiredVolunteers,OptionalVolunteers,PriorityID,EffectiveStartTime, StatusID) VALUES ('" +
+                                                    wt.SQLCleanData(DescriptionTxt.Text) + "'," +
+                                                    wt.SQLCleanData(LocationList.SelectedValue) + "," +
+                                                    wt.SQLCleanData(DepartmentList.SelectedValue) + "," +
+                                                    wt.SQLCleanData(StartDayList.SelectedValue) + ",'" +
+                                                    wt.SQLCleanData(GetStartDateTime(StartDayList.SelectedValue)) + "'," +
+                                                    wt.SQLCleanData(DurationTxt.Text) + "," +
+                                                    wt.SQLCleanData(RequiredVolsTxt.Text) + "," +
+                                                    wt.SQLCleanData(OptionalVolsTxt.Text) + "," +
+                                                    wt.SQLCleanData(PriorityList.SelectedValue) + ",'" +
+                                                    wt.SQLCleanData(GetStartDateTime(StartDayList.SelectedValue)) + "'," +
+                                                    wt.SQLCleanData(StatusList.SelectedValue) + "); SET @Identity = SCOPE_IDENTITY();";
+                    VolDataSource.Insert();
+
+                    for (int ndx = 0; ndx < totalVolunteers; ndx++)
+                    {
+                        VolDataSource.InsertCommand = "INSERT INTO TaskVolunteers (TaskID, DateCreated) Values (" + taskID + ", dbo.SYSDATE())";
+                        VolDataSource.Insert();
+                    }
+
+                    UpdateEffectiveDateTime();
+            
+                }
+                catch (Exception exc)
+                {
+                    wt.LogError(exc.Message, "Error in Task Information Page - Update Task", Page);
+                }
+
+                Button btn = (Button)sender;
+
+                if (btn.ID == "UpdateTaskInfoBtn")
+                {
+                    Response.Redirect("TasksDefault.aspx?taskID=" + taskID);
+                }
+                else
+                {
+                    TaskInformationLabel.Text = "Task '" + wt.SQLCleanData(DescriptionTxt.Text) + "' at " + GetStartDateTime(StartDayList.SelectedValue) + " added";
+                }
+            }
+            else
+            {
+                bool deleteError = false;
+                taskID = wt.SQLCleanData(Request.QueryString["TaskID"]);
+
+                try
+                {
+                    VolDataSource.UpdateCommand = "UPDATE Tasks SET " +
+                                                    "Description = '" + wt.SQLCleanData(DescriptionTxt.Text) + "'," +
+                                                    "LocationID = " + wt.SQLCleanData(LocationList.SelectedValue) + "," +
+                                                    "DepartmentID = " + wt.SQLCleanData(DepartmentList.SelectedValue) + "," +
+                                                    "DayID = " + wt.SQLCleanData(StartDayList.SelectedValue) + "," +
+                                                    "StartTime = '" + wt.SQLCleanData(GetStartDateTime(StartDayList.SelectedValue)) + "'," +
+                                                    "Duration = " + wt.SQLCleanData(DurationTxt.Text) + "," +
+                                                    "RequiredVolunteers = " + wt.SQLCleanData(RequiredVolsTxt.Text) + "," +
+                                                    "OptionalVolunteers = " + wt.SQLCleanData(OptionalVolsTxt.Text) + "," +
+                                                    "PriorityID = " + wt.SQLCleanData(PriorityList.SelectedValue) + "," +
+                                                    "EffectiveStartTime = '" + wt.SQLCleanData(GetStartDateTime(StartDayList.SelectedValue)) + "'," +
+                                                    "StatusID = " + wt.SQLCleanData(StatusList.SelectedValue) +
+                                                    " WHERE TaskID = " + taskID;
+                    VolDataSource.Update();
+
+                    VolDataSource.SelectCommand = "SELECT count(*) as VolCount FROM TaskVolunteers WHERE TaskID = " + taskID;
+                    DataView dv = (DataView)VolDataSource.Select(DataSourceSelectArguments.Empty);
+
+                    int currentVolunteers = Convert.ToInt32(dv.Table.Rows[0]["VolCount"]);
+
+                    for (int ndx = 0; ndx < totalVolunteers - currentVolunteers; ndx++)
+                    {
+                        VolDataSource.InsertCommand = "INSERT INTO TaskVolunteers (TaskID, DateCreated) Values (" + taskID + ", dbo.SYSDATE())";
+                        VolDataSource.Insert();
+                    }
+
+                    for (int ndx = 0; ndx < currentVolunteers - totalVolunteers; ndx++)
+                    {
+                        VolDataSource.DeleteCommand = "DELETE FROM TaskVolunteers " +
+                                                        "WHERE TaskVolunteerID in (SELECT MAX(TaskVolunteerID) " +
+                                                                                    "FROM TaskVolunteers " +
+                                                                                    "WHERE VolunteerID is null " +
+                                                                                    " AND TaskID = " + taskID + ")";
+                        if (VolDataSource.Delete() == 0)
+                        {
+                            TaskInformationLabel.Text = "There are now more volunteers assigned to the task than required + optional!";
+                            deleteError = true;
+                        }
+                    }
+
+                    UpdateEffectiveDateTime();
+                }
+                catch (Exception exc)
+                {
+                    wt.LogError(exc.Message, "Error in Task Information Page - Update Task", Page);
+                }
+
+                if (!deleteError)
+                {
+                    Response.Redirect("TasksDefault.aspx?taskID=" + taskID);
+                }
+            }
+           
+        }
+    }
+
+    private string GetStartDateTime(string dayID)
+    {
+        DataView dv;        
+        String startDateTime;
+
+        VolDataSource.SelectCommand = "SELECT convert(varchar,date,110) as date FROM Days WHERE DayID = " + dayID;
+        dv = (DataView)VolDataSource.Select(DataSourceSelectArguments.Empty);
+
+        startDateTime = (string)dv.Table.Rows[0]["Date"] + " " + StartTimeHRList.SelectedValue + ":" + StartTimeMinList.SelectedValue + StartTimeAMPMList.SelectedValue;
+        return startDateTime;
+    }
+
+    private void UpdateEffectiveDateTime()
+    {
+        DataView dv;
+        String roomClosed, roomOpened;
+
+        VolDataSource.SelectCommand = "SELECT Value FROM Settings WHERE Name = 'RoomClosed'";
+        dv = (DataView)VolDataSource.Select(DataSourceSelectArguments.Empty);
+
+        roomClosed = (string)dv.Table.Rows[0]["Value"];
+
+        VolDataSource.SelectCommand = "SELECT Value FROM Settings WHERE Name = 'RoomOpened'";
+        dv = (DataView)VolDataSource.Select(DataSourceSelectArguments.Empty);
+
+        roomOpened = (string)dv.Table.Rows[0]["Value"];
+
+        VolDataSource.UpdateCommand = "UPDATE Tasks SET EffectiveStartTime = CONVERT(varchar, CONVERT(date, StartTime)) + ' " + roomClosed + "'" +
+                                      " WHERE (CONVERT(time, StartTime) >= CONVERT(time, '" + roomClosed + "'))";
+        VolDataSource.Update();
+
+        VolDataSource.UpdateCommand = "UPDATE Tasks SET EffectiveStartTime = CONVERT(varchar, CONVERT(date, DATEADD(day, - 1, StartTime))) + ' " + roomClosed + "'" +
+                                      " WHERE (CONVERT(time, StartTime) <= CONVERT(time, '" + roomOpened + "'))";
+        VolDataSource.Update();
+    }
+
+    protected void VolDataSource_Inserted(object sender, SqlDataSourceStatusEventArgs e)
+    {
+        if (taskID == null)
+        {
+            taskID = e.Command.Parameters["@Identity"].Value.ToString();
+        }
+    }
+
+    protected void TasksGridView_RowCommand(Object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "Details")
+        {
+            int index = Convert.ToInt32(e.CommandArgument);
+            string volunteerID = TasksGridView.DataKeys[index].Value.ToString();
+            Response.Redirect("~/VolunteerDetails.aspx?volID=" + volunteerID);
+        }
+    }
+
+    private string taskID;
+}

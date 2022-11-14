@@ -1,0 +1,45 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="VolunteersSite.master.cs" Inherits="SiteMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head runat="server">
+    <title></title>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form runat="server">
+    <div class="page">
+        <div class="header">
+            <div class="title">
+                <h1>Fanime Volunteers</h1>
+            </div>
+            <div class="loginDisplay">
+                <asp:Label ID="DateTimeLabel" runat="server" Text=""></asp:Label>
+            </div>
+           <div class="clear hideSkiplink">
+                <asp:Menu ID="VolunteersMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+                    <Items>
+                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
+                        <asp:MenuItem NavigateUrl="~/VolunteersDefault.aspx" Text="Volunteers" Selected="True" />
+                        <asp:MenuItem NavigateUrl="~/TasksDefault.aspx" Text="Tasks"/>
+                        <asp:MenuItem NavigateUrl="~/SettingsDefault.aspx" Text="Settings"/>
+                        <asp:MenuItem NavigateUrl="~/Help.aspx" Text="Help" Value="Help"></asp:MenuItem>
+                    </Items>
+                    <StaticSelectedStyle CssClass="H1" />
+                </asp:Menu>
+            </div>
+        </div>
+        <div class="main">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="footer">
+        
+    </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,143 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data;
+
+public partial class SettingsDefault : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        WebToolbox wt = new WebToolbox();
+        DataView dv;
+
+        try
+        {
+            DaysDataSource.SelectCommand = "SELECT DayID, Name, Date FROM Days ORDER BY Date";
+            DaysDataSource.Select(DataSourceSelectArguments.Empty);
+            dv = (DataView)DaysDataSource.Select(DataSourceSelectArguments.Empty);
+
+            if (dv.Table.Rows.Count == 0)
+            {
+                DaysLabel.Text = "Search had no results";
+            }
+            else
+            {
+                DaysLabel.Text = "";
+            }
+
+            DepartmentsDataSource.SelectCommand = "SELECT DepartmentID, Name, Head FROM Departments ORDER BY Name";
+            DepartmentsDataSource.Select(DataSourceSelectArguments.Empty);
+            dv = (DataView)DepartmentsDataSource.Select(DataSourceSelectArguments.Empty);
+
+            if (dv.Table.Rows.Count == 0)
+            {
+                DepartmentsLabel.Text = "Search had no results";
+            }
+            else
+            {
+                DepartmentsLabel.Text = "";
+            }
+
+            LocationsDataSource.SelectCommand = "SELECT LocationID, Name, Description FROM Locations ORDER BY Name";
+            LocationsDataSource.Select(DataSourceSelectArguments.Empty);
+            dv = (DataView)LocationsDataSource.Select(DataSourceSelectArguments.Empty);
+
+            if (dv.Table.Rows.Count == 0)
+            {
+                LocationsLabel.Text = "Search had no results";
+            }
+            else
+            {
+                LocationsLabel.Text = "";
+            }
+
+            SettingsDataSource.SelectCommand = "SELECT SettingID, Name, Value FROM Settings ORDER BY Name";
+            SettingsDataSource.Select(DataSourceSelectArguments.Empty);
+            dv = (DataView)SettingsDataSource.Select(DataSourceSelectArguments.Empty);
+
+            if (dv.Table.Rows.Count == 0)
+            {
+                SettingsLabel.Text = "Search had no results";
+            }
+            else
+            {
+                SettingsLabel.Text = "";
+            }
+        }
+        catch (Exception exc)
+        {
+            wt.LogError(exc.Message, "Error in Settings Default Page - Page Load", Page);
+        }
+    }
+
+    protected void AddNewDaysBtn_Click(object sender, EventArgs e)
+    {
+        WebToolbox wt = new WebToolbox();
+
+        try
+        {
+            DaysDataSource.InsertCommand = "INSERT INTO DAYS (Name, Date) VALUES ('" +
+                                            wt.SQLCleanData(NameTxt.Text) + "','" +
+                                            wt.SQLCleanData(DateTxt.Text) + "');";
+            DaysDataSource.Insert();
+        }
+        catch (Exception exc)
+        {
+            wt.LogError(exc.Message, "Error in Settings Page - Insert Day", Page);
+        }
+    }
+
+    protected void AddNewDeptBtn_Click(object sender, EventArgs e)
+    {
+        WebToolbox wt = new WebToolbox();
+
+        try
+        {
+            DepartmentsDataSource.InsertCommand = "INSERT INTO DEPARTMENTS (Name, Head) VALUES ('" +
+                                            wt.SQLCleanData(DeptNameTxt.Text) + "','" +
+                                            wt.SQLCleanData(DeptHeadTxt.Text) + "');";
+            DepartmentsDataSource.Insert();
+        }
+        catch (Exception exc)
+        {
+            wt.LogError(exc.Message, "Error in Settings Page - Insert Departments", Page);
+        }
+    }
+
+    protected void AddNewLocationBtn_Click(object sender, EventArgs e)
+    {
+        WebToolbox wt = new WebToolbox();
+
+        try
+        {
+            LocationsDataSource.InsertCommand = "INSERT INTO LOCATIONS (Name, Description) VALUES ('" +
+                                            wt.SQLCleanData(LocationNameTxt.Text) + "','" +
+                                            wt.SQLCleanData(LocationDescriptionTxt.Text) + "');";
+            LocationsDataSource.Insert();
+        }
+        catch (Exception exc)
+        {
+            wt.LogError(exc.Message, "Error in Settings Page - Insert Locations", Page);
+        }
+    }
+
+    protected void AddNewSettingBtn_Click(object sender, EventArgs e)
+    {
+        WebToolbox wt = new WebToolbox();
+
+        try
+        {
+            SettingsDataSource.InsertCommand = "INSERT INTO Settings (Name, Value) VALUES ('" +
+                                            wt.SQLCleanData(SettingsNameTxt.Text) + "','" +
+                                            wt.SQLCleanData(SettingsValueTxt.Text) + "');";
+            SettingsDataSource.Insert();
+        }
+        catch (Exception exc)
+        {
+            wt.LogError(exc.Message, "Error in Settings Page - Insert Setting", Page);
+        }
+    }
+}

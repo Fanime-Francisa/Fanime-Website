@@ -1,0 +1,90 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-Fanime_Website-2D4A144B-DB06-4223-B751-8028598EC20A</UserSecretsId>
+    <RootNamespace>Fanime_Website</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\Volunteers\.svn\pristine\5e\5e934536a406e6674b8887b80528dc55289fea28.svn-base.jpg" />
+    <Content Include="wwwroot\Volunteers\.svn\pristine\7e\7e0ebf2f2b2b44fa194ba292d6ec96baa1df1c52.svn-base.xml" />
+    <Content Include="wwwroot\Volunteers\.svn\pristine\e3\e3b2e634749740d1949792640c3af3ee9019b74a.svn-base.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Volunteers\.svn\entries" />
+    <None Include="wwwroot\Volunteers\.svn\format" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\07\07e121d078fe400a892753def81b287c71a4074e.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\0a\0a84d6c4c8ba38c19746881e7e2a8fe31c2181d6.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\0e\0e3bec460a0f63874d3deac0e1ac94293e6d9f79.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\12\1203e4d82173a726780395e3faadee8bab51f7d1.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\26\265c43a879148f908d2427b14bc2d9baef037ba2.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\2d\2dae0b23d1af9b2a90d497b627f88d3f90e51ba0.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\2e\2e7106c22573e9bfaaded07f9821a7836d80f8b5.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\31\31afd727fbbbad60beea1809c4bad43193ad4989.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\32\3230ac1dbab7d2c15a2e783e8199ed47e14a04e8.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\33\33739bc7d5b41b631e828f91d6b88f3f77fbbc92.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\38\38ae14ce71182f3129a87ee4890ef3d44ef3e01b.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\38\38bc436f36be1fcd2bfaf3d410d7386c5957440f.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\3d\3d1dd19d5d97d0f2bdbf496c2e7d534203aac9d5.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\3f\3ff74b1ef5a72049a9c45aa76c4469c8b25e6f51.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\40\404bd48a41d39ccedae9796d217f6f0f7f040a6e.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\4d\4d803fa8b58709831b1408606d95855322f6eb3a.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\52\52817faab62f2665dfa55f753850f940a47445ca.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\53\5314387715ff2be856376489b4a17f3350fb1c97.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\54\545c46495c673dd8a338be42e1d1cf79486de799.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\56\56b2b9079ef7e3c3907ec8b99db0854c4a88e541.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\58\580dac7c24c412e547d06b5bd7e23007a5a14272.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\5b\5b00030229582414286ccc56182daae5507ebf0c.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\69\69ba61bc669ae780a9879ccebe2321cce218c375.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\6f\6f1ab30ab173782172f48a6779d5f2a3bbccd63f.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\6f\6f6757677ae00b00190060c7d97f3baab19f46ea.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\74\745f8229a86d4d24abb8ca85a8698c0d0cf697b1.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\75\7513839922052f68f3fcc15ed4dcd9e1cd765b87.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\80\80d9c2d9b993ea6a7ffe633990a63fe04ecd239f.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\90\9068b2efdf581f65a4e6fd2c2627e9e69e3fb9c8.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\95\95f3172264f656cb38805e54b43406a459b9f2ec.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\9a\9a8c568e6b5bfe8fe897942385190641572989ca.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\9d\9d1d2aebc92deb84eb52a7f3067032811b53b8ed.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\9d\9da37502698a965811e1c8112a616453d192a983.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\9f\9f09a8f1ba67d6b69dd1896d2f23918c430bb959.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\b0\b014e98e245114c040e582fbd3b85fb3dc424d8c.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\b3\b392da973761b5e0524b0cd9bf24bcf0bfc51fab.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\ba\bad43d5061f122afd8e1ecf534145ff09281e7eb.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\be\be3f8686ee4c8044ee589908a24909711f29d8ca.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\c7\c76ef192075deb8c93331f393ad8d174b9c43389.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\c8\c856b2b47b526441e6cd2b362cf752b8d42767a5.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\c8\c8b0a7851c8338233265cb2e6f52fdb1decb5278.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\cd\cd6c3017fce162cc89d4f17507a6d8d364b16b31.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\d4\d4011c7260e5f11c59987d36e29fc86236b9d548.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\d5\d52759c1941190ddef679c3e505347c184055e45.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\d6\d623e37d2a34b2422933b7de2213b3844365a9c6.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\d7\d725d8c2ea1b5f24f8a605a21fdc7c41fc6ecd66.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\d8\d839b8ee4b36ac33909a842d8cc250698d8d81dc.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\d9\d9ca19d688994c641272524e2c532f2e4180e85e.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\e2\e228e423089c46d373a57fc23b5b0fed1fbbeee2.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\e5\e5a2aadbd97b3802759391c2870373adb6bc075b.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\e9\e9cc264ce741022b814fade529f8876c6363e638.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\f3\f3017de5b65f09ab1bf3ef2bd423f98bb3c73d85.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\f5\f52d48938d099ea26f5edf3cc2c31a34fdd1a43b.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\pristine\f8\f86ebfa4e95a6acf2cb93bb09cbbb5567504153d.svn-base" />
+    <None Include="wwwroot\Volunteers\.svn\wc.db" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Volunteers\aspnet_client\system_web\2_0_50727\" />
+    <Folder Include="wwwroot\Volunteers\aspnet_client\system_web\4_0_30319\" />
+  </ItemGroup>
+
+</Project>
