@@ -25,12 +25,12 @@
             <td>Badge ID:</td>
             <td><asp:Label ID="BadgeIDLabel" runat="server"></asp:Label></td>
         </tr>
-        <tr>
+        <tr class="AgeTR" runat="server">
             <td>Age:</td>
-            <td><asp:Label ID="AgeLabel" runat="server"></asp:Label></td>
+                <td><asp:Label ID="AgeLabel" runat="server"></asp:Label></td>
         </tr>
         <tr>
-            <td>Mobile</td>
+            <td>Mobile:</td>
             <td><asp:Label ID="MobileLabel" runat="server"></asp:Label></td>
         </tr>
     </table>

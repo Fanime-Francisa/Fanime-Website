@@ -28,9 +28,9 @@
             <td><asp:RequiredFieldValidator ID="BadgeIDValidator" runat="server" ErrorMessage="Required" ForeColor="Red" ControlToValidate="BadgeIDTxt"></asp:RequiredFieldValidator></td>
         </tr>
         <tr>
-            <td>Age</td>
-            <td><asp:TextBox ID="AgeTxt" runat="server" Width="70%" MaxLength="3"></asp:TextBox></td>
-            <td><asp:RangeValidator ID="AgeValidator" runat="server" ErrorMessage="Number Required" ControlToValidate="AgeTxt" ForeColor="Red" MinimumValue="1" MaximumValue="150" Type="Integer"></asp:RangeValidator></td>
+            <td>Date of Birth</td>
+            <td><asp:TextBox ID="DateOfBirthTxt" runat="server" Width="70%" MaxLength="10"></asp:TextBox></td>
+            <td><asp:CompareValidator ID="DateOfBirthValidator" runat="server" ErrorMessage="Date Required" ControlToValidate="DateOfBirthTxt" ForeColor="Red" Type="Date" Operator="DataTypeCheck" ></asp:CompareValidator></td>
         </tr>
         <tr>
             <td>Mobile</td>

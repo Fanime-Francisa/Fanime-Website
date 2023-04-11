@@ -23,12 +23,32 @@ public partial class VolunteersDefault : System.Web.UI.Page
         Response.Redirect("VolunteerInformation.aspx");
     }
 
+    protected void GridviewRowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            // int MinorFlag = (int)dv.Table.Rows[0]["IsMinor"];
+            int AgeCheck = Convert.ToInt32(e.Row.Cells[4].Text);
+            // int MinorFlag = Convert.ToInt32(e.Row.Cells[3].Text);
+            if (AgeCheck < 13)
+            {
+                e.Row.ToolTip = "This individual is under the age of 13 and CANNOT volunteer for anything.";
+                e.Row.BackColor = System.Drawing.Color.Red;
+            } else if (AgeCheck < 16)
+            {
+                e.Row.ToolTip = "This individual is under the age of 16 and has some restrictions on the tasks that they can sign up for.";
+                e.Row.BackColor = System.Drawing.Color.Orange;
+            }
+        }
+    }      
+
     protected void VolunteersGridView_RowCommand(Object sender, GridViewCommandEventArgs e)
     {
         if (e.CommandName == "Select")
         {
             int index = Convert.ToInt32(e.CommandArgument);
             string volunteerID = VolunteersGridView.DataKeys[index].Value.ToString();
+
             Response.Redirect("VolunteerDetails.aspx?volID=" + volunteerID + "&taskID=" + taskID);
         }
     }

@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <asp:SqlDataSource ID="VolDataSource" runat="server" 
      ConnectionString="<%$ ConnectionStrings:VolunteersConnectionString %>" 
-        SelectCommand="SELECT [VolunteerID], [FirstName], [LastName], [BadgeID] FROM [Volunteers] ORDER BY [LastName], [FirstName]"></asp:SqlDataSource>
+        SelectCommand="SELECT [VolunteerID], [FirstName], [LastName], [BadgeID], [Age] FROM [Volunteers] ORDER BY [LastName], [FirstName]"></asp:SqlDataSource>
     <p><h2>Search</h2></p>
      <table width="800px" cellspacing="4px" cellpadding="4px">
         <tr>
@@ -28,12 +28,14 @@
         CssClass="buttonStyle" onclick="VolunteersSearchBtn_Click" />
     &nbsp;<asp:Button ID="AddNewVolunteerBtn" runat="server" Text="Add New Volunteer" 
             CssClass="buttonStyle" onclick="AddNewVolunteerBtn_Click" />
+    <p><asp:Label Text="O" runat="server" BackColor="Orange" ForeColor="Orange"></asp:Label>: This individual is under the age of 16 and has some restrictions on the tasks that they can sign up for.</p>
+    <p><asp:Label Text="O" runat="server" BackColor="Red" ForeColor="Red"></asp:Label>: This individual is under the age of 13 and CANNOT volunteer for anything.</p>
     <p><h2>Volunteers</h2></p>
     <asp:GridView ID="VolunteersGridView" runat="server" DataKeyNames="VolunteerID"
         AutoGenerateColumns="False" DataSourceID="VolDataSource" 
         AllowPaging="True" AllowSorting="True" CellPadding="4" CssClass="volunteersGV" 
         ForeColor="#333333" GridLines="None" OnRowCommand="VolunteersGridView_RowCommand"
-        PageSize="20">
+        PageSize="20" OnRowDataBound= "GridviewRowDataBound">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <Columns>
             <asp:ButtonField ItemStyle-CssClass="volunteersSelect" CommandName="Select" ItemStyle-Width="50px" Text="Details" />
@@ -43,6 +45,8 @@
                 SortExpression="LastName" ItemStyle-Width="150px" HeaderStyle-HorizontalAlign="Left" />
             <asp:BoundField DataField="BadgeID" HeaderText="Badge ID"
                 SortExpression="BadgeID" ItemStyle-Width="100px" HeaderStyle-HorizontalAlign="Left" />
+            <asp:BoundField DataField="Age" HeaderText="Age"
+                SortExpression="Age" ItemStyle-Width="100px" HeaderStyle-HorizontalAlign="Left" />
         </Columns>
         <EditRowStyle BackColor="#999999" />
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />

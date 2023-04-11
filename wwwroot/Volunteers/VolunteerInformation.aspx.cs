@@ -30,7 +30,8 @@ public partial class VolunteerDetails : System.Web.UI.Page
                     FirstNameTxt.Text = Convert.ToString(dv.Table.Rows[0]["FirstName"]);
                     LastNameTxt.Text = Convert.ToString(dv.Table.Rows[0]["LastName"]);
                     BadgeIDTxt.Text = Convert.ToString(dv.Table.Rows[0]["BadgeID"]);
-                    AgeTxt.Text = Convert.ToString(dv.Table.Rows[0]["Age"]);
+                    DateTime dt = DateTime.Parse(Convert.ToString(dv.Table.Rows[0]["DateOfBirth"]));
+                    DateOfBirthTxt.Text = dt.ToString("M/dd/yyyy");
                     MobileTxt.Text = Convert.ToString(dv.Table.Rows[0]["Mobile"]);
                     CommentsTxt.Text = Convert.ToString(dv.Table.Rows[0]["Comments"]);
 
@@ -70,13 +71,13 @@ public partial class VolunteerDetails : System.Web.UI.Page
             {
                 try
                 {
-                    VolDataSource.InsertCommand = "INSERT INTO VOLUNTEERS (FirstName,LastName,BadgeID,Age,Mobile," +
+                    VolDataSource.InsertCommand = "INSERT INTO VOLUNTEERS (FirstName,LastName,BadgeID,DateOfBirth,Mobile," +
                                                     " EmergencyFirstName,EmergencyLastName,Relation,EmergencyMobile,EmergencyAltMobile,MedicalConditions," +
                                                     " Address,City,State,Zip,Email,ReimbursementPhone,Comments,DateCreated) VALUES ('" +
                                                     wt.SQLCleanData(FirstNameTxt.Text) + "','" +
                                                     wt.SQLCleanData(LastNameTxt.Text) + "','" +
                                                     wt.SQLCleanData(BadgeIDTxt.Text) + "','" +
-                                                    wt.SQLCleanData(AgeTxt.Text) + "','" +
+                                                    wt.SQLCleanData(DateOfBirthTxt.Text) + "','" +
                                                     wt.SQLCleanData(MobileTxt.Text) + "','" +
                                                     wt.SQLCleanData(EmergencyFirstNameTxt.Text) + "','" +
                                                     wt.SQLCleanData(EmergencyLastNameTxt.Text) + "','" +
@@ -108,7 +109,7 @@ public partial class VolunteerDetails : System.Web.UI.Page
                                                     "FirstName = '" + wt.SQLCleanData(FirstNameTxt.Text) + "'," +
                                                     "LastName = '" + wt.SQLCleanData(LastNameTxt.Text) + "'," +
                                                     "BadgeID = '" + wt.SQLCleanData(BadgeIDTxt.Text) + "'," +
-                                                    "Age = '" + wt.SQLCleanData(AgeTxt.Text) + "'," +
+                                                    "DateOfBirth = '" + wt.SQLCleanData(DateOfBirthTxt.Text) + "'," +
                                                     "Mobile = '" + wt.SQLCleanData(MobileTxt.Text) + "'," +
                                                     "EmergencyFirstName = '" + wt.SQLCleanData(EmergencyFirstNameTxt.Text) + "'," +
                                                     "EmergencyLastName = '" + wt.SQLCleanData(EmergencyLastNameTxt.Text) + "'," +

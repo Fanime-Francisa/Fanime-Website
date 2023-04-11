@@ -46,6 +46,7 @@ public partial class VolunteerDetails : System.Web.UI.Page
 
             VolDataSource.SelectCommand = "SELECT * FROM Volunteers WHERE volunteerID = " + volID;
             dv = (DataView)VolDataSource.Select(DataSourceSelectArguments.Empty);
+            string AgeTR;
 
             if (dv.Table.Rows.Count > 0)
             {
@@ -54,6 +55,13 @@ public partial class VolunteerDetails : System.Web.UI.Page
                 BadgeIDLabel.Text = (string)dv.Table.Rows[0]["BadgeID"];
                 AgeLabel.Text = dv.Table.Rows[0]["Age"].ToString();
                 MobileLabel.Text = (string)dv.Table.Rows[0]["Mobile"];
+                int MinorFlag = (int)dv.Table.Rows[0]["IsMinor"];
+
+                if (MinorFlag == -1) {
+                    AgeLabel.BackColor = System.Drawing.Color.Red;
+                } else if (MinorFlag == 0) {
+                    AgeLabel.BackColor = System.Drawing.Color.Orange;
+                }
 
                 UpdateVolunteerLink.NavigateUrl = "~/VolunteerInformation.aspx?volID=" + volID;
             }
