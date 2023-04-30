@@ -176,6 +176,14 @@
                     ErrorMessage="Invalid phone number" 
                     ValidationExpression="^\d{3}-\d{3}-\d{4}" ControlToValidate="ReimbursementPhoneTxt"></asp:RegularExpressionValidator></td>
         </tr>
+        <tr>
+             <td>ID Upload</td>
+            <td><asp:FileUpload ID="FileUpload1" runat="server" Text="Upload File" /></td>
+
+            <td><asp:Button ID="IDbtnUpload" runat="server" Text="Upload ID"  onclick="IDbtnUpload_Click" /></td>
+
+            <td><asp:Label ID="lblStatus" runat="server" Font-Bold="True"/></asp:Label></td>
+        </tr>
     </table>
     <br />
     <asp:Button ID="UpdateVolunteerInfoBtn" runat="server" 

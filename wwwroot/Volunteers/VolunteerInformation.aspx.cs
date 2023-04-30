@@ -61,6 +61,24 @@ public partial class VolunteerDetails : System.Web.UI.Page
         }
     }
 
+    protected void IDbtnUpload_Click(object sender, EventArgs e)
+    {
+
+        if (FileUpload1.HasFile)
+        {
+            FileUpload1.SaveAs(Server.MapPath("~/Uploads/" + FileUpload1.FileName));
+            lblStatus.Text = "File Uploaded";
+            lblStatus.ForeColor = System.Drawing.Color.Green;
+
+        }
+        else
+        {
+            lblStatus.Text = "Please select a file to upload";
+            lblStatus.ForeColor = System.Drawing.Color.Red;
+        }
+
+    }
+
     protected void UpdateVolunteerInfoBtn_Click(object sender, EventArgs e)
     {
         if (Page.IsValid) 
